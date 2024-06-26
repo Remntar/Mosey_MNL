@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 moviesTable.style.display = 'table';
                 hideMoviesButton.style.display = 'inline-block';
             })
-            .catch(error => console.error('Error fetching data:', error));
+            .catch(error => console.error('Error data:', error));
     });
 
     hideMoviesButton.addEventListener('click', () => {
