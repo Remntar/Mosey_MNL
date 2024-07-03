@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Búsqueda de Películas</title>
+    <script>
+        async function buscarPeliculas() {
+            const apiKey = 'TU_API_KEY_AQUI'; // Reemplaza con tu clave API de TMDb
+            const query = document.getElementById('query').value;
+            const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                mostrarResultados(data.results);
+            } catch (error) {
+                console.error('Error al buscar películas:', error);
+            }
+        }
+
+        function mostrarResultados(peliculas) {
+            const resultados = document.getElementById('resultados');
+            resultados.innerHTML = '';
+
+            peliculas.forEach(pelicula => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <h3>${pelicula.title}</h3>
+                    <p>${pelicula.overview}</p>
+                `;
+                resultados.appendChild(div);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Búsqueda de Películas</h1>
+    <input type="text" id="query" placeholder="Ingresa el nombre de la película">
+    <button onclick="buscarPeliculas()">Buscar</button>
+    <div id="resultados"></div>
+</body>
+</html>
